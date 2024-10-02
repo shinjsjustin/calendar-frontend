@@ -1,26 +1,40 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async(e) => {
         e.preventDefault();
+        setError('');
 
-        const response = await fetch('http://localhost:3001/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({email, password}),
-        });
-
-        if(response.ok){
+        try{
+            const response = await fetch('http://localhost:3001/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email, password}),
+            });
             const data = await response.json();
-            console.log('Login successful:', data);
-            window.location.href = '/calendar';
+            console.log('Login request data: ', data);
+    
+            if(response.status === 200){
+                localStorage.setItem('token', data.token);
+                navigate('/calendar');
+            }else if(response.status === 404){
+                setError('No users found with that email.  Register?')
+            }else if(response.status === 404){
+                setError('Invalid Password')
+            }else{
+                setError('Server side error')
+            }
+        }catch(err){
+            setError('An error has occured during login');
+            console.error(err)
         }
     };
 

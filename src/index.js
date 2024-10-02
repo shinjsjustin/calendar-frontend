@@ -9,6 +9,7 @@ import Calendar from './components/Calendar';
 import Register from './components/Register';
 import NoPage from './components/NoPage';
 import Home from './components/Home';
+import ProtectedRoute from './config/ProtectedRoute';
 
 export default function App(){
   return (
@@ -17,7 +18,11 @@ export default function App(){
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path="/calendar" element={<Calendar/>} />
+        <Route path="/calendar" element={
+          <ProtectedRoute>
+            <Calendar/>
+          </ProtectedRoute>
+        } />
         <Route path="/*" element={<NoPage/>} />
       </Routes>
     </BrowserRouter>
