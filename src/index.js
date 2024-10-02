@@ -11,11 +11,14 @@ import NoPage from './components/NoPage';
 import Home from './components/Home';
 import ProtectedRoute from './config/ProtectedRoute';
 
+import Monthly from './components/calendar_component/Monthly';
+
 export default function App(){
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/monthly" element={<Monthly/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/calendar" element={
