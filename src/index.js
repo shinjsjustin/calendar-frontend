@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
-import Login from './components/Login';
+import Login from './components/navbar_components/Login';
 import Calendar from './components/Calendar';
 import Register from './components/Register';
 import NoPage from './components/NoPage';
@@ -12,6 +12,7 @@ import Home from './components/Home';
 import ProtectedRoute from './config/ProtectedRoute';
 
 import Monthly from './components/calendar_component/Monthly';
+import CreateEvent from './components/navbar_components/CreateEvent';
 
 export default function App(){
   return (
@@ -19,6 +20,7 @@ export default function App(){
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/monthly" element={<Monthly/>} />
+        <Route path="/test" element={<CreateEvent/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/calendar" element={
